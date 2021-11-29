@@ -1,6 +1,10 @@
-import LoginScreen from "../components/Screens/LoginScreen";
+import MainScreen from "../components/Screens/MainScreen";
 import Wrapper from "../components/Wrapper";
 
-const Home = () => <Wrapper>Logged in!</Wrapper>;
+const Home = () => (
+  <Wrapper>
+    <MainScreen />
+  </Wrapper>
+);
 
 export default Home;
