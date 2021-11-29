@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "habit_logs",
+  "info": {
+    "name": "Habit Log"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "habit": {
+      "model": "habits"
+    },
+    "date_completed": {
+      "type": "datetime"
+    },
+    "skip": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
