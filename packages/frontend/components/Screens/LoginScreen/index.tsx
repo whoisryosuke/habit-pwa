@@ -1,12 +1,15 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
+import API from "../../../constants/api";
+import { useUserValue } from "../../../context/UserContext";
 import { saveUserCookie } from "../../../utils/cookies";
 
 interface Props {}
 
 const LoginScreen = (props: Props) => {
+  const { loginUser } = useUserValue();
   const handleLogin = async () => {
-    const results = await fetch("http://localhost:1337/auth/local", {
+    const results = await fetch(API.login, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -21,10 +24,18 @@ const LoginScreen = (props: Props) => {
     });
 
     const data = await results.json();
-    console.log(data);
-    // Save the JWT to cookie for use later
+    // console.log(data);
+
+    // Did we get a token?
     if ("jwt" in data) {
+      // Save the JWT to cookie for use later
       saveUserCookie(data.jwt);
+
+      // Login user using context provider
+      loginUser({
+        name: data.user.username,
+        email: data.user.email,
+      });
     }
   };
   return (
