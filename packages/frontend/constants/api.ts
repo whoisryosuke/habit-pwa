@@ -1,4 +1,4 @@
-const API_ROOT = "http://localhost:1337";
+const API_ROOT = "http://localhost:1337/api";
 
 export const API = {
   root: `${API_ROOT}`,

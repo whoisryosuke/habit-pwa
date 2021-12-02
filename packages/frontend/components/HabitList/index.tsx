@@ -18,8 +18,12 @@ const HabitList = ({ date }: Props) => {
   if (!habits) return <div>loading...</div>;
   return (
     <Box width="100%">
-      {habits.map((habit) => (
-        <HabitListItem title={habit.title} id={habit.id} completed={false} />
+      {habits.data.map((habit) => (
+        <HabitListItem
+          title={habit.attributes.title}
+          id={habit.attributes.id}
+          completed={false}
+        />
       ))}
     </Box>
   );

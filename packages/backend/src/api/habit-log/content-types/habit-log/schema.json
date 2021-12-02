@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "habit_logs",
+  "info": {
+    "singularName": "habit-log",
+    "pluralName": "habit-logs",
+    "displayName": "Habit Log"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date_completed": {
+      "type": "datetime"
+    },
+    "skip": {
+      "type": "boolean",
+      "default": false
+    },
+    "habit": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::habit.habit"
+    }
+  }
+}

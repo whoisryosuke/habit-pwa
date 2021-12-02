@@ -37,8 +37,8 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     // Check cookies if we have JWT
-    const token = getUserCookie();
-    console.log("token", token, typeof window === "undefined");
+    // const token = getUserCookie();
+    // console.log("token", token, typeof window === "undefined");
   }, []);
 
   return (

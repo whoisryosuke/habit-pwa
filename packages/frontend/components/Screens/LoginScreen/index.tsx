@@ -24,10 +24,11 @@ const LoginScreen = (props: Props) => {
     });
 
     const data = await results.json();
-    // console.log(data);
+    console.log("login data", data);
 
     // Did we get a token?
     if ("jwt" in data) {
+      console.log("saving JWT");
       // Save the JWT to cookie for use later
       saveUserCookie(data.jwt);
 
