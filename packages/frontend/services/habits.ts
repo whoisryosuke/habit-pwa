@@ -6,3 +6,20 @@ export const getAllHabits = async () => {
   console.log("habits function", data);
   return data;
 };
+
+export const getAllHabitLogs = async () => {
+  const data = await fetchWithAuth(API.habitlogs);
+  console.log("habit logs function", data);
+  return data;
+};
+
+export const postHabitLog = async (habit: number, skip = false) => {
+  const data = await fetchWithAuth(API.habitlogs, {
+    data: {
+      habit,
+      date_completed: new Date(),
+    },
+  });
+  console.log("post habit logs function", data);
+  return data;
+};
