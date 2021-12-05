@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import useSWR from "swr";
-import { getAllHabits } from "../../services/habits";
+import API from "../../constants/api";
+import { getAllHabitLogs, getAllHabits } from "../../services/habits";
 import HabitListItem from "../HabitListItem";
 
 interface Props {
@@ -9,9 +10,15 @@ interface Props {
 }
 
 const HabitList = ({ date }: Props) => {
-  const { data: habits, error } = useSWR("/", getAllHabits, {
+  const { data: habits, error } = useSWR(API.habits, getAllHabits, {
     onError: (err, key, config) => console.error("swr error", err, key, config),
   });
+  const { data: habitLogs, error: habitLogErrors } = useSWR(
+    API.habitlogs,
+    getAllHabitLogs
+  );
+
+  console.log("habit logs", habitLogs);
   console.log("habits swr", habits, error);
 
   if (error) return <div>failed to load</div>;
