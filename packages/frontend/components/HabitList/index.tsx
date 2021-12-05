@@ -18,6 +18,17 @@ const HabitList = ({ date }: Props) => {
     getAllHabitLogs
   );
 
+  const sortedLog = habits.reduce((prevHabit, currHabit) => {
+    return {
+      ...prevHabit,
+      [currHabit.id]: habitLogs.some((habitLog) => {
+        console.log("habitLog", habitLog, habitLog.habit);
+        return habitLog?.habit?.id === currHabit.id;
+      }),
+    };
+  }, {});
+  console.log("sorted log", sortedLog);
+
   console.log("habit logs", habitLogs);
   console.log("habits swr", habits, error);
 
@@ -26,7 +37,11 @@ const HabitList = ({ date }: Props) => {
   return (
     <Box width="100%">
       {habits.map((habit) => (
-        <HabitListItem title={habit.title} id={habit.id} completed={false} />
+        <HabitListItem
+          title={habit.title}
+          id={habit.id}
+          completed={sortedLog[habit.id]}
+        />
       ))}
     </Box>
   );
