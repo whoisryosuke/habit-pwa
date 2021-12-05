@@ -4,7 +4,8 @@
   "info": {
     "singularName": "habit-log",
     "pluralName": "habit-logs",
-    "displayName": "Habit Log"
+    "displayName": "Habit Log",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false

@@ -17,6 +17,14 @@ const HabitList = ({ date }: Props) => {
   );
   console.log("habits swr", habits, error);
 
+  const sortedLog = habits.data.map((habit) => {
+    return habitLogs.data.filter((habitLog) => {
+      console.log("habitLog", habitLog, habitLog.attributes);
+      return habitLog.attributes.habit === habit.id;
+    });
+  });
+  console.log("sorted log", sortedLog);
+
   if (error) return <div>failed to load</div>;
   if (!habits) return <div>loading...</div>;
 
