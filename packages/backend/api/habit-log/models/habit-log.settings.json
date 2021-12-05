@@ -2,12 +2,13 @@
   "kind": "collectionType",
   "collectionName": "habit_logs",
   "info": {
-    "name": "Habit Log"
+    "name": "Habit Log",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "habit": {

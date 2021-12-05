@@ -8,7 +8,7 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -24,8 +24,8 @@
       "type": "datetime"
     },
     "category": {
-      "via": "habits",
-      "model": "categories"
+      "model": "categories",
+      "via": "habits"
     },
     "user": {
       "plugin": "users-permissions",

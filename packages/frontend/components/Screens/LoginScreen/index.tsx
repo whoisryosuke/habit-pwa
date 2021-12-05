@@ -18,7 +18,7 @@ const LoginScreen = (props: Props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        identifier: "squall.leonhart@test.com",
+        identifier: "ryosuke.san.hana@gmail.com",
         password: "Test4321",
       }),
     });
