@@ -22,12 +22,15 @@ export const createHabitLogUrl = (startDate: Date, endDate?: Date) => {
   } else {
     const startDateAdjust = new Date(startDate);
     startDateAdjust.setHours(0);
-    startDateParsed = startDateAdjust.toISOString();
-    const endDateAdjust = new Date(startDate);
-    endDateAdjust.setHours(23);
-    endDateParsed = endDateAdjust.toISOString();
+    startDateParsed = startDateAdjust.toISOString().split("T")[0];
+    startDateAdjust.setHours(23);
+    endDateParsed = startDateAdjust.toISOString().split("T")[0];
   }
-  return `${API.habitlogs}&filters[createdAt][$gte]=${startDateParsed}&filters[createdAt][$lte]=${endDateParsed}`;
+  console.log(
+    "url",
+    `${API.habitlogs}&filters[date_completed][$gte]=${startDateParsed}T00:00:00.150Z&filters[date_completed][$lte]=${endDateParsed}T23:59:59.150Z`
+  );
+  return `${API.habitlogs}&filters[date_completed][$gte]=${startDateParsed}T00:00:00.150Z&filters[date_completed][$lte]=${endDateParsed}T23:59:59.150Z`;
 };
 
 // export const getHabitLogsByDate = async (startDate: Date, endDate?: Date) => {
@@ -40,11 +43,15 @@ export const createHabitLogUrl = (startDate: Date, endDate?: Date) => {
 //   return data;
 // };
 
-export const postHabitLog = async (habit: number, skip = false) => {
+export const postHabitLog = async (
+  habit: number,
+  date_completed: Date = new Date(),
+  skip = false
+) => {
   const data = await fetchWithAuth(API.habitlogs, {
     data: {
       habit,
-      date_completed: new Date(),
+      date_completed,
     },
   });
   console.log("post habit logs function", data);

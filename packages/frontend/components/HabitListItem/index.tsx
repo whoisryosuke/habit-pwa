@@ -13,13 +13,14 @@ interface Props {
   title: string;
   id: number;
   completed: boolean;
+  date: Date;
 }
 
-const HabitListItem = ({ title, id, completed }: Props) => {
+const HabitListItem = ({ title, id, completed, date }: Props) => {
   const subtitleColor = useColorModeValue("gray.700", "gray.400");
   const handleComplete = () => {
     console.log("complete!", id);
-    postHabitLog(id);
+    postHabitLog(id, date);
   };
   return (
     <Flex width="100%" justifyContent="space-between">

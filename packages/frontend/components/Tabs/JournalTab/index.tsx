@@ -11,6 +11,7 @@ const DEFAULT_DATE = new Date();
 
 const JournalTab = (props: Props) => {
   const [currentDate, setCurrentDate] = useState(DEFAULT_DATE);
+  console.log("date", currentDate.toDateString());
   return (
     <Box>
       <Heading>My Journal</Heading>

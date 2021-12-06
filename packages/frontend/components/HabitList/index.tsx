@@ -45,6 +45,7 @@ const HabitList = ({ date }: Props) => {
           title={habit.attributes.title}
           id={habit.id}
           completed={sortedLog[habit.id]}
+          date={date}
         />
       ))}
     </Box>
