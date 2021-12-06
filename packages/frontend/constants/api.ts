@@ -5,5 +5,6 @@ export const API = {
   login: `${API_ROOT}/auth/local`,
   habits: `${API_ROOT}/habits`,
   habitlogs: `${API_ROOT}/habit-logs?populate=habit`,
+  categories: `${API_ROOT}/categories`,
 };
 export default API;

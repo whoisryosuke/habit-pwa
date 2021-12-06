@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { getAllHabits } from "../../../services/habits";
 import CalendarBrowser from "../../CalendarBrowser";
+import CategoryTabs from "../../CategoryTabs";
 import HabitList from "../../HabitList";
 
 interface Props {}
@@ -21,14 +22,13 @@ const JournalTab = (props: Props) => {
     : `${currentDate.toLocaleString("default", { month: "long" })} 
         ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
   return (
-    <Box>
+    <Box position="relative" flex="1">
       <Heading size="sm" color="gray.500">
         {currentDateString}
       </Heading>
       <Heading>My Journal</Heading>
-      {/* CATEGORY TABS */}
+      <CategoryTabs />
       <HabitList date={currentDate} />
-      {/* CALENDAR BROWSER */}
       <CalendarBrowser
         currentDate={currentDate}
         setCurrentDate={setCurrentDate}

@@ -7,9 +7,15 @@ interface Props {}
 
 const MainScreen = (props: Props) => {
   return (
-    <Tabs position="relative" minHeight="100vh">
-      <TabPanels>
-        <TabPanel>
+    <Tabs
+      position="relative"
+      minHeight="100vh"
+      display="flex"
+      flexDirection="column"
+      flex="1"
+    >
+      <TabPanels display="flex" flexDirection="column" flex="1">
+        <TabPanel display="flex" flex="1" flexDirection="column">
           <JournalTab />
         </TabPanel>
       </TabPanels>

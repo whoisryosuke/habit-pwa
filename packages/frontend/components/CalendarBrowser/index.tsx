@@ -32,6 +32,8 @@ export default function CalendarBrowser({
 
   console.log("currentDayIndex", currentDate.toDateString(), currentDayIndex);
 
+  // @TODO: Show day name
+  // @TODO: Start from current date, let user go 1 day in future, 20 days in past
   const createDayButtons = new Array(daysInMonth).fill(0).map((_, dayIndex) => (
     <Button
       onClick={() => handleDateChange(dayIndex + 1)}
@@ -42,7 +44,13 @@ export default function CalendarBrowser({
   ));
 
   return (
-    <Flex width="100%" overflowX="scroll">
+    <Flex
+      width="100%"
+      overflowX="scroll"
+      position="absolute"
+      bottom="0"
+      left="0"
+    >
       {createDayButtons}
     </Flex>
   );
