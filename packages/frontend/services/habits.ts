@@ -15,15 +15,19 @@ export const getAllHabitLogs = async () => {
 
 export const createHabitLogUrl = (startDate: Date, endDate?: Date) => {
   // If user doesn't pass an end date, assume it's same day EOD
+  let startDateParsed = startDate.toISOString();
   let endDateParsed;
   if (endDate) {
     endDateParsed = endDate.toISOString();
   } else {
-    endDateParsed = startDate.setHours(23);
+    const startDateAdjust = new Date(startDate);
+    startDateAdjust.setHours(0);
+    startDateParsed = startDateAdjust.toISOString();
+    const endDateAdjust = new Date(startDate);
+    endDateAdjust.setHours(23);
+    endDateParsed = endDateAdjust.toISOString();
   }
-  return `${
-    API.habitlogs
-  }&filters[createdAt][$gte]=${startDate.toISOString()}&filters[createdAt][$lte]=${endDateParsed}`;
+  return `${API.habitlogs}&filters[createdAt][$gte]=${startDateParsed}&filters[createdAt][$lte]=${endDateParsed}`;
 };
 
 // export const getHabitLogsByDate = async (startDate: Date, endDate?: Date) => {
