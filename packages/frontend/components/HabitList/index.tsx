@@ -1,8 +1,14 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import API from "../../constants/api";
-import { getAllHabitLogs, getAllHabits } from "../../services/habits";
+import {
+  createHabitLogUrl,
+  getAllHabitLogs,
+  getAllHabits,
+  getHabitLogsByDate,
+} from "../../services/habits";
+import { fetchWithAuth } from "../../utils/fetch";
 import HabitListItem from "../HabitListItem";
 
 interface Props {
@@ -12,8 +18,8 @@ interface Props {
 const HabitList = ({ date }: Props) => {
   const { data: habits, error } = useSWR(API.habits, getAllHabits);
   const { data: habitLogs, error: habitLogErrors } = useSWR(
-    API.habitlogs,
-    getAllHabitLogs
+    createHabitLogUrl(date),
+    fetchWithAuth
   );
   console.log("habits swr", habits, error);
   console.log("habit logs", habitLogs, habitLogErrors);
