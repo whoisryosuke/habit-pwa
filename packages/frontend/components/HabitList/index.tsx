@@ -18,7 +18,7 @@ interface Props {
 const HabitList = ({ date }: Props) => {
   const { data: habits, error } = useSWR(API.habits, getAllHabits);
   const { data: habitLogs, error: habitLogErrors } = useSWR(
-    createHabitLogUrl(date),
+    createHabitLogUrl(date, date),
     fetchWithAuth
   );
   console.log("habits swr", habits, error);
@@ -27,7 +27,7 @@ const HabitList = ({ date }: Props) => {
   const sortedLog = habits?.data.reduce((prevHabit, currHabit) => {
     return {
       ...prevHabit,
-      [currHabit.id]: habitLogs?.data.some((habitLog) => {
+      [currHabit.id]: habitLogs?.data?.some((habitLog) => {
         console.log("habitLog", habitLog, habitLog.attributes);
         return habitLog?.attributes.habit?.data.id === currHabit.id;
       }),
