@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, HStack } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -43,5 +43,5 @@ export default function CalendarBrowser({
     </Button>
   ));
 
-  return <Flex overflowX="scroll">{createDayButtons}</Flex>;
+  return <HStack overflowX="scroll">{createDayButtons}</HStack>;
 }

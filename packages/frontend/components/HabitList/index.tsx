@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import useSWR from "swr";
 import API from "../../constants/api";
@@ -39,7 +39,7 @@ const HabitList = ({ date }: Props) => {
   if (!habits) return <div>loading...</div>;
 
   return (
-    <Box width="100%">
+    <VStack width="100%">
       {habits.data.map((habit) => (
         <HabitListItem
           title={habit.attributes.title}
@@ -48,7 +48,7 @@ const HabitList = ({ date }: Props) => {
           date={date}
         />
       ))}
-    </Box>
+    </VStack>
   );
 };
 
