@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
+import { useCategoryValue } from "../../../context/CategoryContext";
 import { getAllHabits } from "../../../services/habits";
 import CalendarBrowser from "../../CalendarBrowser";
 import CategoryTabs from "../../CategoryTabs";
@@ -12,6 +13,7 @@ interface Props {}
 const DEFAULT_DATE = new Date();
 
 const JournalTab = (props: Props) => {
+  const { currentCategory } = useCategoryValue();
   const [currentDate, setCurrentDate] = useState(DEFAULT_DATE);
   console.log("date", currentDate.toDateString());
   const isToday =
@@ -29,7 +31,7 @@ const JournalTab = (props: Props) => {
       </Heading>
       <Heading>My Journal</Heading>
       <CategoryTabs />
-      <HabitList date={currentDate} />
+      <HabitList date={currentDate} currentCategory={currentCategory} />
       <Flex width="100%" position="absolute" bottom="0" left="0">
         <CalendarBrowser
           currentDate={currentDate}

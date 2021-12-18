@@ -6,17 +6,20 @@ import {
   createHabitLogUrl,
   getAllHabitLogs,
   getAllHabits,
-  getHabitLogsByDate,
 } from "../../services/habits";
 import { fetchWithAuth } from "../../utils/fetch";
 import HabitListItem from "../HabitListItem";
 
 interface Props {
   date: Date;
+  currentCategory: number;
 }
 
-const HabitList = ({ date }: Props) => {
-  const { data: habits, error } = useSWR(API.habits, getAllHabits);
+const HabitList = ({ date, currentCategory = -1 }: Props) => {
+  const { data: habits, error } = useSWR(
+    `${API.habits}${currentCategory}`,
+    () => getAllHabits(currentCategory)
+  );
   const { data: habitLogs, error: habitLogErrors } = useSWR(
     createHabitLogUrl(date, date),
     fetchWithAuth
@@ -24,6 +27,8 @@ const HabitList = ({ date }: Props) => {
   console.log("habits swr", habits, error);
   console.log("habit logs", habitLogs, habitLogErrors);
 
+  // We take the log data and remap it to a hashmap of habit ids
+  // Makes it easier to see what habit is complete vs not
   const sortedLog = habits?.data.reduce((prevHabit, currHabit) => {
     return {
       ...prevHabit,

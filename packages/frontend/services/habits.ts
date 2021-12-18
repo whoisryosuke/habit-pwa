@@ -1,8 +1,12 @@
 import API from "../constants/api";
 import { fetchWithAuth } from "../utils/fetch";
 
-export const getAllHabits = async () => {
-  const data = await fetchWithAuth(API.habits);
+export const getAllHabits = async (category = null) => {
+  const filters =
+    category && category >= 0 ? `?filters[category][id]=${category}` : "";
+  const url = `${API.habits}${filters}`;
+  console.log("api url", url);
+  const data = await fetchWithAuth(url);
   console.log("habits function", data);
   return data;
 };

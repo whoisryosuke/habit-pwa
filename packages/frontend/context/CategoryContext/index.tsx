@@ -19,19 +19,23 @@ const CATEGORY_DEFAULT_CONTEXT: CategoryData[] = [];
 export const CategoryContext = createContext({
   categories: CATEGORY_DEFAULT_CONTEXT,
   currentCategory: -1,
-  setCurrentCategory: null,
+  changeCategory: null,
 });
 
 export const CategoryProvider = ({ children }) => {
   const [currentCategory, setCurrentCategory] = useState(-1);
   const { data: categories, error } = useSWR(API.categories, getAllCategories);
 
+  const changeCategory = (newCategory: number) => {
+    setCurrentCategory(newCategory);
+  };
+
   return (
     <CategoryContext.Provider
       value={{
-        categories: categories.data ?? [],
+        categories: !categories ? [] : categories.data,
         currentCategory,
-        setCurrentCategory,
+        changeCategory,
       }}
     >
       {children}
