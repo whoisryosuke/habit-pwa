@@ -1,10 +1,11 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { getAllHabits } from "../../../services/habits";
 import CalendarBrowser from "../../CalendarBrowser";
 import CategoryTabs from "../../CategoryTabs";
 import HabitList from "../../HabitList";
+import NewHabitButton from "../../NewHabitButton";
 
 interface Props {}
 
@@ -29,10 +30,13 @@ const JournalTab = (props: Props) => {
       <Heading>My Journal</Heading>
       <CategoryTabs />
       <HabitList date={currentDate} />
-      <CalendarBrowser
-        currentDate={currentDate}
-        setCurrentDate={setCurrentDate}
-      />
+      <Flex width="100%" position="absolute" bottom="0" left="0">
+        <CalendarBrowser
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+        />
+        <NewHabitButton />
+      </Flex>
       {/* NEW HABIT BUTTON */}
     </Box>
   );

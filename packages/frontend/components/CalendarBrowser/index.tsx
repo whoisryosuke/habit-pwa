@@ -43,15 +43,5 @@ export default function CalendarBrowser({
     </Button>
   ));
 
-  return (
-    <Flex
-      width="100%"
-      overflowX="scroll"
-      position="absolute"
-      bottom="0"
-      left="0"
-    >
-      {createDayButtons}
-    </Flex>
-  );
+  return <Flex overflowX="scroll">{createDayButtons}</Flex>;
 }
