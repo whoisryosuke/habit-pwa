@@ -1,20 +1,20 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, HStack } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import useSWR from "swr";
-import API from "../../constants/api";
-import { fetchWithAuth } from "../../utils/fetch";
+import { useCategoryValue } from "../../context/CategoryContext";
 
 interface Props {}
 
 export default function CategoryTabs({}: Props): ReactElement {
-  const { data: categories, error } = useSWR(API.categories, fetchWithAuth);
-  if (error) return <div>failed to load</div>;
-  if (!categories) return <div>loading...</div>;
+  const { categories, currentCategory, setCurrentCategory } =
+    useCategoryValue();
   return (
-    <Flex width="100%" overflowX="scroll">
-      {categories.data.map((category) => (
-        <Button>{category.attributes.name}</Button>
+    <HStack width="100%" overflowX="scroll">
+      <Button fontWeight={currentCategory < 0 && "bold"}>All Habits</Button>
+      {categories.map((category) => (
+        <Button fontWeight={currentCategory == category.id && "bold"}>
+          {category.attributes.name}
+        </Button>
       ))}
-    </Flex>
+    </HStack>
   );
 }
