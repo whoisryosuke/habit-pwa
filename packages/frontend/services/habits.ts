@@ -7,6 +7,16 @@ export const getAllHabits = async () => {
   return data;
 };
 
+export const postHabit = async (data: any) => {
+  const result = await fetchWithAuth(API.habits, {
+    data,
+  });
+  console.log("post habit function", result);
+  return result;
+};
+
+// Habit Logs
+
 export const getAllHabitLogs = async () => {
   const data = await fetchWithAuth(API.habitlogs);
   console.log("habit logs function", data);

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -11,7 +11,10 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Select,
 } from "@chakra-ui/react";
+import { postHabit } from "../../services/habits";
+import { useCategoryValue } from "../../context/CategoryContext";
 
 interface Props {
   isOpen: boolean;
@@ -22,10 +25,29 @@ export default function NewHabitModal({
   isOpen,
   onClose,
 }: Props): ReactElement {
+  const [habitData, setHabitData] = useState({
+    title: "",
+    description: "",
+    category: "",
+  });
   const initialRef = React.useRef();
-  // @TODO: Function for new habit
-  // @TODO: Create context provider for categories, use hook here to get them
-  // @TODO: Create dropdown of categories
+  const { categories } = useCategoryValue();
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    setHabitData((oldHabit) => ({
+      ...oldHabit,
+      [name]: value,
+    }));
+  };
+  const handleNewHabit = () => {
+    console.log("habit data", habitData);
+    // Save to API
+    postHabit(habitData);
+
+    // Close modal
+    onClose();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl">
       <ModalOverlay />
@@ -33,19 +55,47 @@ export default function NewHabitModal({
         <ModalHeader>Add new habit</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl>
-            <FormLabel>Name</FormLabel>
-            <Input ref={initialRef} placeholder="Name" />
+          <FormControl mb={4}>
+            <FormLabel>Title</FormLabel>
+            <Input
+              ref={initialRef}
+              placeholder="Brush teeth"
+              name="title"
+              value={habitData.title}
+              onChange={handleInputChange}
+            />
           </FormControl>
 
-          <FormControl mt={4}>
+          <FormControl mb={4}>
+            <FormLabel>Description</FormLabel>
+            <Input
+              ref={initialRef}
+              placeholder=""
+              name="description"
+              value={habitData.description}
+              onChange={handleInputChange}
+            />
+          </FormControl>
+
+          <FormControl>
             <FormLabel>Category</FormLabel>
-            <Input placeholder="Last name" />
+            <Select
+              placeholder="Select a category..."
+              name="category"
+              value={habitData.category}
+              onChange={handleInputChange}
+            >
+              {categories.map((category) => (
+                <option value={category.id}>{category.attributes.name}</option>
+              ))}
+            </Select>
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
-          <Button width="100%">Save</Button>
+          <Button width="100%" onClick={handleNewHabit}>
+            Save
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
